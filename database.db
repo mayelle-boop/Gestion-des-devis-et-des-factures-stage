@@ -14,7 +14,7 @@ CREATE TABLE utilisateur (
     prenom_utilisateur  VARCHAR(200) NOT NULL,
     mot_de_passe        VARCHAR(255) NOT NULL,   -- élargi pour hash (voir note ci-dessous)
     role                VARCHAR(20) NOT NULL
-        CHECK (role IN ('admin', 'gestionnaire', 'commercial', 'employe'))
+        CHECK (role IN ('admin', 'gestionnaire', 'commercial', 'comptable'))
 );
 
 
@@ -23,7 +23,7 @@ CREATE TABLE devis (
     date_creation   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_validation DATE,
     statut          VARCHAR(20) NOT NULL DEFAULT 'brouillon'
-        CHECK (statut IN ('brouillon', 'envoyé', 'accepté', 'annulé')),
+        CHECK (statut IN ('brouillon', 'envoyé', 'accepté', 'refusé')),
     id_client       VARCHAR(15) NOT NULL,
     id_utilisateur  VARCHAR(20) NOT NULL,
     FOREIGN KEY (id_client) REFERENCES client(id_client),
@@ -34,7 +34,8 @@ CREATE TABLE ligne_devis (
     id_ligne      VARCHAR(16) PRIMARY KEY,
     designation   VARCHAR(50),
     quantite      FLOAT NOT NULL,
-    prix_unitaire DOUBLE NOT NULL,
+    prix_unitaire DOUBLE(3,2) NOT NULL,
+    tva           DOUBLE(3,2) NOT NULL
     numero_devis  VARCHAR(12) NOT NULL,
     FOREIGN KEY (numero_devis) REFERENCES devis(numero_devis) ON DELETE CASCADE,
 );
@@ -44,8 +45,8 @@ CREATE TABLE facture (
     date_creation   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_echeance   DATETIME,
     statut          VARCHAR(20) NOT NULL DEFAULT 'impayee'
-        CHECK (statut IN ('impayee', 'partiellement_payee', 'payee')),
-    numero_devis    VARCHAR(12) NOT NULL UNIQUE,   -- 1,1 <-> 0,1 => unicité
+        CHECK (statut IN ('impayée', 'partiellement_payée', 'payée')),
+    numero_devis    VARCHAR(12) NOT NULL UNIQUE,  
     FOREIGN KEY (numero_devis) REFERENCES devis(numero_devis)
 );
 
