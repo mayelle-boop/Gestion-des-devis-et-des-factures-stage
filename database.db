@@ -4,8 +4,8 @@ PRAGMA foreign_keys = ON;
 CREATE TABLE client (
     id_client   VARCHAR(15) PRIMARY KEY,
     nom         VARCHAR(200) NOT NULL,
-    email       VARCHAR(50),
-    adresse     VARCHAR(200)
+    email       VARCHAR(50) NOT NULL,
+    adresse     VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE utilisateur (
@@ -17,21 +17,13 @@ CREATE TABLE utilisateur (
         CHECK (role IN ('admin', 'gestionnaire', 'commercial', 'employe'))
 );
 
-CREATE TABLE service (
-    id_service          VARCHAR(10) PRIMARY KEY,
-    nom                 VARCHAR(200) NOT NULL,
-    description         TEXT,
-    prix_unitaire_ser   FLOAT NOT NULL,
-    unite               VARCHAR(20),
-    type                VARCHAR(30) NOT NULL
-);
 
 CREATE TABLE devis (
     numero_devis    VARCHAR(12) PRIMARY KEY,
     date_creation   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_validation DATE,
     statut          VARCHAR(20) NOT NULL DEFAULT 'brouillon'
-        CHECK (statut IN ('brouillon', 'valide', 'annule')),
+        CHECK (statut IN ('brouillon', 'envoyé', 'accepté', 'annulé')),
     id_client       VARCHAR(15) NOT NULL,
     id_utilisateur  VARCHAR(20) NOT NULL,
     FOREIGN KEY (id_client) REFERENCES client(id_client),
@@ -44,9 +36,7 @@ CREATE TABLE ligne_devis (
     quantite      FLOAT NOT NULL,
     prix_unitaire DOUBLE NOT NULL,
     numero_devis  VARCHAR(12) NOT NULL,
-    id_service    VARCHAR(10) NOT NULL,
     FOREIGN KEY (numero_devis) REFERENCES devis(numero_devis) ON DELETE CASCADE,
-    FOREIGN KEY (id_service) REFERENCES service(id_service)
 );
 
 CREATE TABLE facture (
@@ -66,5 +56,7 @@ CREATE TABLE paiement (
     mode_paiement   VARCHAR(20) NOT NULL
         CHECK (mode_paiement IN ('especes', 'cheque', 'virement', 'carte', 'mobile_money')),
     numero_facture  VARCHAR(15) NOT NULL,
+    id_client       VARCHAR(15)NOT NULL,
     FOREIGN KEY (numero_facture) REFERENCES facture(numero_facture)
+    FOREIGN KEY (id_client) REFERENCES client(id_client)
 );
