@@ -32,8 +32,6 @@ class Utlisateur (db.model):
     devis = db.relationship('devis', backref = 'Utilisateur', lazy = True)
 
 
-
-
     def __repr__(self):
         return f'<Utilisateur {self.nom} {self.email} {self.role}>'
 
@@ -58,7 +56,6 @@ class Devis (db.model):
     @property
     def total(self):
         return sum(LigneDevis.prix_unitaire * LigneDevis.quantite * (1 + LigneDevis.tva / 100) for LigneDevis in self.LigneDevis)
-
 
     def __repr__(self):
         return f'<Devis {self.numero_devis}>'
