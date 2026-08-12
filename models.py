@@ -53,6 +53,17 @@ class Devis (db.Model):
     facture = db.relationship('Facture', backref = 'devis', uselist = False, lazy = True)
 
 
+    @property
+    def total_total_HT(self):
+        return sum(LigneDevis.total_HT for LigneDevis in self.LigneDevis)
+
+    @property
+    def total_montant_TVA(self):
+        return sum(LigneDevis.montant_TVA for LigneDevis in self.LigneDevis)
+
+    @property
+    def total_total_TTC(self):
+        return sum(LigneDevis.total_TTC for LigneDevis in self.LigneDevis)
 
     def __repr__(self):
         return f'<Devis {self.numero_devis}>'
