@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevisFact — Gérez vos devis et factures, simplement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href=" {{ url_for('static', filename = 'css/landingPage2.css')}}">
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <header class="nav">
+    <div class="nav__logo">Devis<span>Fact</span></div>
+    <nav class="nav__links">
+      <a href="#showcase">Démo</a>
+      <a href="#footer">Contact</a>
+    </nav>
+    <a href="#showcase" class="nav__cta">Se Connecter</a>
+  </header>
+
+  <!-- ===== SECTION 1 — HERO AVEC CERCLES ANIMÉS ===== -->
+  <section class="hero" id="hero">
+    <canvas id="circles-canvas"></canvas>
+
+    <div class="hero__content">
+      <span class="hero__eyebrow">Application interne · Devira</span>
+      <h1 class="hero__title">
+        Vos devis.<br>
+        Vos factures.<br>
+        <span class="hero__title-accent">Un seul flux.</span>
+      </h1>
+      <p class="hero__subtitle">
+        DevisFact accompagne chaque devis depuis sa création jusqu'à la facture réglées
+        sans ressaisie, sans dossier perdu, sans friction.
+      </p>
+      <div class="hero__actions">
+        <a href="#showcase" class="btn btn--primary">Découvrir l'application</a>
+        <a href="#footer" class="btn btn--ghost">À propos</a>
+      </div>
+    </div>
+
+    <div class="hero__scroll-hint">
+      <span>Faites défiler</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2 — VITRINE / VIDÉOS ===== -->
+  <section class="showcase" id="showcase">
+    <div class="showcase__intro">
+      <span class="showcase__eyebrow">En situation</span>
+      <h2 class="showcase__title">Trois gestes, un cycle complet</h2>
+      <p class="showcase__text">
+        De la création du devis à l'encaissement du paiement, DevisFact accompagne
+        chaque étape avec la même simplicité.
+      </p>
+    </div>
+
+    <div class="showcase__grid">
+
+      <article class="video-card">
+        <div class="video-card__frame">
+          <video class="video-card__media" poster="" muted loop playsinline controls>
+            <source src="videos/creation-devis.mp4" type="video/mp4">
+          </video>
+          <div class="video-card__placeholder">
+            <div class="play-btn"></div>
+            <p>Remplacez par <code>videos/creation-devis.mp4</code></p>
+          </div>
+        </div>
+        <h3>01 · Créer un devis</h3>
+        <p>Ajoutez un client, listez les prestations, le total se calcule seul.</p>
+      </article>
+
+      <article class="video-card">
+        <div class="video-card__frame">
+          <video class="video-card__media" poster="" muted loop playsinline controls>
+            <source src="videos/conversion-facture.mp4" type="video/mp4">
+          </video>
+          <div class="video-card__placeholder">
+            <div class="play-btn"></div>
+            <p>Remplacez par <code>videos/conversion-facture.mp4</code></p>
+          </div>
+        </div>
+        <h3>02 · Convertir en facture</h3>
+        <p>Un devis accepté devient une facture en un clic, sans ressaisie.</p>
+      </article>
+
+      <article class="video-card">
+        <div class="video-card__frame">
+          <video class="video-card__media" poster="" muted loop playsinline controls>
+            <source src="videos/suivi-paiement.mp4" type="video/mp4">
+          </video>
+          <div class="video-card__placeholder">
+            <div class="play-btn"></div>
+            <p>Remplacez par <code>videos/suivi-paiement.mp4</code></p>
+          </div>
+        </div>
+        <h3>03 · Suivre le paiement</h3>
+        <p>Chaque règlement est rattaché à sa facture et à son client.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <p>DevisFact — Projet réalisé en stage chez Devira, 2026.</p>
+  </footer>
+
+<script src=" {{ url_for('static', filename = 'JavaScript/landingPage2.js')}}"></script>
+</body>
+</html>
