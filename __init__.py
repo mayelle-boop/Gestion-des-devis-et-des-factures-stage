@@ -6,10 +6,10 @@ from DevisFact.models import db
 db = SQLAlchemy()
 
 def create_app():
-    app = Flask(__name__)
-    app.config.from_object(Config)
+    DevisFact = Flask(__name__)
+    DevisFact.config.from_object(Config)
     db.init_app(DevisFact)
-    @app.route('/')
+    @DevisFact.route('/')
     def accueil():
         return "L'application fonctionne ! 🚀"
     return DevisFact
