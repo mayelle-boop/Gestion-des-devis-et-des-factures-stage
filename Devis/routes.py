@@ -3,7 +3,7 @@ from DevisFact.models import db, Devis, LigneDevis, Client
 from datetime import datetime
 import uuid
 
-routes = Blueprint('routes', __name__)
+devis_bp = Blueprint('routes', __name__)
 
 
 def generer_numero_devis():
@@ -12,13 +12,13 @@ def generer_numero_devis():
     return f"DEV-{annee}-{suffixe}"
 
 
-@routes.route('/devis/nouveau', methods=['GET', 'POST'])
+@devis_bp.route('/devis/nouveau', methods=['GET', 'POST'])
 def creer_devis():
 
     # --- GET : afficher le formulaire ---
     if request.method == 'GET':
         clients = Client.query.all()
-        return render_template('devis_form.html', clients=clients)
+        return render_template('devis.html', clients=clients)
 
     # --- POST : traiter la soumission ---
 
@@ -74,3 +74,39 @@ def creer_devis():
 
     flash(f"Devis {numero_devis} créé avec succès.", "success")
     return redirect(url_for('routes.voir_devis', numero=numero_devis))
+
+
+
+@devis_bp.route('/devis/afficher')
+def afficher_devis(numero_devis):
+    devis = Devis.query.get_or_404(numero_devis)
+    client = Client.query.get(devis.id_client)
+    lignes = LigneDevis.query.filter_by(id_devis=numero_devis).all()
+    
+    # Infos de ton entreprise - tu peux les mettre en dur ou en BDD
+    entreprise = {
+        "nom": "DevisFact SARL",
+        "adresse": "Yaoundé, Bastos",
+        "telephone": "+237 6 90 00 00 00",
+        "email": "contact@devisfact.cm",
+        "logo": "logo.png",  # le nom du fichier dans static/img/
+        "nif": "P0123456789"
+    }
+
+    return render_template('display_devis.html', devis=devis, client=client, lignes=lignes, entreprise=entreprise)
+
+@devis_bp.route('/devis/list')
+def liste_devis():
+    # 1. Récupère tous les devis de la BDD, du plus récent au plus ancien
+    tous_les_devis = Devis.query.order_by(Devis.date_creation.desc()).all()
+    
+    # 2. Pour chaque devis, on récupère aussi le nom du client
+    liste = []
+    for devis in tous_les_devis:
+        client = Client.query.get(devis.id_client)
+        liste.append({
+            'devis': devis,
+            'client_nom': client.nom if client else "Client supprimé"
+        })
+
+    return render_template('list_devis.html', liste_devis=liste)

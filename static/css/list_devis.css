@@ -1,0 +1,16 @@
+ :root { --rose: #FF4FA3; --bleu: #3D6BFF; --violet: #7B2FF7; --gris-fond: #F3F1F7; }
+        body { font-family: 'Inter'; background: #FAF8FC; padding: 40px; }
+        .conteneur { max-width: 1100px; margin: 0 auto; background: white; padding: 32px; border-radius: 16px; }
+        h1 { font-family: 'Sora'; background: linear-gradient(90deg, var(--rose), var(--violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 24px; }
+        
+        .btn-nouveau { background: linear-gradient(90deg, var(--rose), var(--violet)); color: white; padding: 12px 20px; border-radius: 999px; text-decoration: none; font-weight: 600; float: right; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { text-align: left; padding: 14px; background: var(--gris-fond); font-size: 12px; text-transform: uppercase; }
+        td { padding: 14px; border-bottom: 1px solid var(--gris-fond); }
+        tr:hover { background: #FAF8FC; }
+        
+        .btn-voir { background: var(--bleu); color: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; font-size: 13px; }
+        .btn-voir:hover { opacity: 0.9; }
+        
+        .montant { font-weight: 700; }

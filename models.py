@@ -50,7 +50,9 @@ class Devis (db.Model):
     id_client = db.Column(db.Integer, db.ForeignKey('CLIENT.id_client'), nullable = False)
     id_utilisateur = db.Column(db.Integer, db.ForeignKey('UTILISATEUR.id_utilisateur'), nullable = False)
     date_creation = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)   
-    date_validation = db.Column(db.Date, nullable = True)
+    duree_validite = db.Column(db.Integer, nullable = True)
+    pied_de_page = db.Column(db.String(2000), nullable = True)
+    condition_reglement = db.Column(db.String(2000), nullable = True)
     statut = db.Column(
         db.Enum('brouillon', 'envoyé', 'accepté', 'refusé', name = 'statut_enum'),
         nullable = False,

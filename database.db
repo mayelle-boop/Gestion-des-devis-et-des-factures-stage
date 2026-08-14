@@ -20,9 +20,11 @@ CREATE TABLE utilisateur (
 CREATE TABLE devis (
     numero_devis    VARCHAR(12) PRIMARY KEY,
     date_creation   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    date_validation DATE,
+    duree_validite  INTEGER(3),
+    condition_reglement VARCHAR(2000),
+    pied_de_page          VARCHAR(2000),
     statut          VARCHAR(20) NOT NULL DEFAULT 'brouillon'
-        CHECK (statut IN ('brouillon', 'envoyé', 'accepté', 'refusé')),
+        CHECK (statut IN ('brouillon', 'envoyé', 'accepté', 'refusé')),    
     id_client       VARCHAR(15) NOT NULL,
     id_utilisateur  VARCHAR(20) NOT NULL,
     FOREIGN KEY (id_client) REFERENCES client(id_client),

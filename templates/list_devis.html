@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Devis - DevisFact</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/list_devis.css') }}">
+       
+</head>
+<body>
+    <div class="conteneur">
+        <a href="{{ url_for('routes.creer_devis') }}" class="btn-nouveau">+ Nouveau Devis</a>
+        <h1>📄 Liste des Devis</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>N° Devis</th>
+                    <th>Client</th>
+                    <th>Date</th>
+                    <th>Validité</th>
+                    <th class="text-right">Total TTC</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in liste_devis %}
+                <tr>
+                    <td><b>#{{ item.devis.id_devis }}</b></td>
+                    <td>{{ item.client_nom }}</td>
+                    <td>{{ item.devis.date_creation.strftime('%d/%m/%Y') }}</td>
+                    <td>{{ item.devis.duree_validite }} jours</td>
+                    <td class="montant">{{ "%.2f"|format(item.devis.total_ttc) }} €</td>
+                    <td>
+                        <a href="{{ url_for('routes.afficher_devis', id_devis=item.devis.id_devis) }}" class="btn-voir">Voir</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" style="text-align:center; padding: 40px;">Aucun devis créé pour le moment.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
