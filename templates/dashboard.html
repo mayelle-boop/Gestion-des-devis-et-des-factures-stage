@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="url_for('static', filename = 'css/style.css')">
+</head>
+<body>
+
+
+{% block content %}
+
+    <div class="welcome-card">
+        <h1>Bienvenue, {{ session.get('nom') }} </h1>
+        <p>Vous êtes connecté(e) en tant que <strong>{{ session.get('role') }}</strong>.</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card stat-pink">
+            <span class="stat-label">Clients</span>
+            <span class="stat-value">{{ nb_clients }}</span>
+        </div>
+        <div class="stat-card stat-blue">
+            <span class="stat-label">Devis en attente</span>
+            <span class="stat-value">{{ nb_devis_attente }}</span>
+        </div>
+        <div class="stat-card stat-violet">
+            <span class="stat-label">Factures ce mois</span>
+            <span class="stat-value">{{ nb_factures_mois }}</span>
+        </div>
+    </div>
+
+{% endblock %}
+</body>
+</html>

@@ -1,21 +1,33 @@
-from tempfile import template
-
-from flask import Flask, render_template
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt 
 from config import Config
-from DevisFact.models import db
+
+
 
 db = SQLAlchemy()
-
+bcrypt = Bcrypt()
 
 def create_app():
-    DevisFact = Flask(__name__, static_folder='static', template_folder='templates', instance_relative_config=True)
-    DevisFact.config.from_object(Config)
-    db.init_app(DevisFact)
-    @DevisFact.route('/')
-    def accueil():
-        return render_template("landingPage2.html")
-    return DevisFact
+   
+    DevisFacts = Flask(__name__, static_folder='static', template_folder='templates', instance_relative_config=True)
+    DevisFacts.config.from_object(Config)
+    db.init_app(DevisFacts)
+    bcrypt.init_app(DevisFacts)
+
+    from .Auth.Auth_routes import auth_bp
+    from .Dashboard.Dashboard_routes import dashboard_bp
+    from .main.Main_routes import main_bp
+    from .Devis.routes import devis_bp
+    DevisFacts.register_blueprint(auth_bp)
+    DevisFacts.register_blueprint(dashboard_bp)
+    DevisFacts.register_blueprint(main_bp)
+    DevisFacts.register_blueprint(devis_bp)
+    
+    
+
+    return DevisFacts
+
 
 
 

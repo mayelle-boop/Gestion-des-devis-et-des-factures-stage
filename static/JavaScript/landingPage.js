@@ -86,15 +86,15 @@
 /* ============================================
    GESTION DES VIDÉOS — Section Vitrine
    ============================================ */
-(function () {
+/*(function () {
   const videos = document.querySelectorAll(".video-card__media");
 
-  videos.forEach((video) => {
-    const card = video.closest(".video-card__frame");
+  videos.forEach((card) => {
+    const card = card.querySelectort(".video-card__frame");
     const placeholder = card.querySelector(".video-card__placeholder");
 
     video.addEventListener("loadeddata", () => {
-      placeholder.style.display = "none";
+      placeholder.style.display = "";
       video.style.display = "block";
     });
 
@@ -106,3 +106,29 @@
     video.style.display = "none";
   });
 })();
+*/
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const videos = document.querySelectorAll(".video-card_media");
+
+    videos.forEach((card) => {
+        const video = card.querySelector("video");
+        const placeholder = card.querySelector(".video-card__placeholder");
+
+        // 1. On affiche la vidéo direct, pas besoin d'attendre
+        if(video) {
+            video.style.display = "block";
+        }
+        if(placeholder) {
+            placeholder.style.display = "none";
+        }
+
+        // 2. Si il y a une erreur, on le voit dans la console
+        video.addEventListener("error", (e) => {
+            console.error("Erreur de chargement de la vidéo:", e);
+            // On laisse la vidéo visible pour voir le message d'erreur du navigateur
+        });
+    });
+
+});

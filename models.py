@@ -1,8 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime 
+from DevisFact import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
-
-db = SQLAlchemy()
 
 
 class Client (db.Model):
@@ -12,14 +12,14 @@ class Client (db.Model):
     email = db.Column(db.String(100), nullable = False)
     adresse =db.Column(db.String(200), nullable = False)
 
-    devis = db.relationship('devis', backref = 'client', lazy = True)
-    payments = db.relationship('payment', backref = 'client', lazy = True)
+    devis = db.relationship('Devis', backref = 'client', lazy = True)
+    paiement = db.relationship('Paiement', backref = 'client', lazy = True)
 
     def __repr__(self):
         return f'<Client {self.nom}>'
 
 
-class Utlisateur (db.Model):
+class Utilisateur (db.Model):
     __tablename__ = 'UTILISATEUR'
     id_utilisateur = db.Column(db.Integer, primary_key = True)
     nom = db.Column(db.String(50), nullable = False)
@@ -29,7 +29,14 @@ class Utlisateur (db.Model):
         db.Enum('admin', 'commercial', 'gestionnaire', 'comptable', name = 'role_enum'),
         nullable = False,
     ) 
-    devis = db.relationship('devis', backref = 'Utilisateur', lazy = True)
+    devis = db.relationship('Devis', backref = 'Utilisateur', lazy = True)
+
+    def set_password(self, password):
+        self.mot_de_passe = generate_password_hash(password)
+
+
+    def check_password(self, password):
+        return check_password_hash(self.mot_de_passe, password)   
 
 
     def __repr__(self):
@@ -113,9 +120,10 @@ class Facture (db.Model):
 
 
 
-class paiement (db.Model):
+class Paiement (db.Model):
     __tablename__ = 'PAIEMENT'
     code_paiement = db.Column(db.Integer, primary_key = True)
+    id_client = db.Column(db.Integer, db.ForeignKey('CLIENT.id_client'), nullable = False)
     numero_facture = db.Column(db.String(12), db.ForeignKey('FACTURE.numero_facture'), nullable = False)
     date_paiement = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
     mode_paiement = db.Column(

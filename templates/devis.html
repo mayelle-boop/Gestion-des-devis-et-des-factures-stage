@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Nouveau devis - DevisFact</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/devis.css') }}">
+</head>
+<body>
+
+<div class="conteneur">
+  <h1>📄 Nouveau devis</h1>
+
+  <form method="POST" action="{{ url_for('routes.creer_devis') }}">
+
+    <!-- === Destinataire === -->
+    <div class="section-titre">Destinataire</div>
+    <div class="ligne-destinataire">
+      <select name="id_client" id="selectClient" required>
+        <option value="">-- Sélectionner un client --</option>
+        {% for client in clients %}
+        <option value="{{ client.id_client }}">{{ client.nom }}</option>
+        {% endfor %}
+      </select>
+      <button type="button" class="btn-modifier-client" title="Modifier / ajouter un client">✏️</button>
+    </div>
+
+    <!-- === Informations === -->
+    <div class="section-titre">Informations</div>
+    <div class="grille-infos">
+      <div class="champ champ-duree">
+        <div style="flex:1;">
+          <label>Durée de validité</label>
+          <input type="number" name="duree_validite" min="1" placeholder="30">
+        </div>
+        <span>jours</span>
+      </div>
+    </div>
+
+    <!-- === Tableau des lignes === -->
+    <div class="section-titre">&nbsp;</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:50%">Désignation</th>
+          <th style="width:20%">Quantité</th>
+          <th style="width:20%">Prix (€)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="lignesDevis"></tbody>
+    </table>
+
+    <button type="button" class="btn-ajouter-ligne" onclick="ajouterLigne()">+ Ajouter une ligne</button>
+
+    <!-- === TVA === -->
+    <div class="champ champ-tva">
+      <label>TVA (%)</label>
+      <input type="number" step="0.01" min="0" name="taux_tva" id="tauxTva" placeholder="Laisser vide si non applicable" oninput="calculerTotal()">
+    </div>
+
+    <!-- === Résumé === -->
+    <div class="resume">
+      <div class="ligne-resume">
+        <span>Total HT</span>
+        <span id="totalHT">0,00 €</span>
+      </div>
+      <div class="ligne-resume">
+        <span id="labelTva">TVA</span>
+        <span id="montantTva">0,00 €</span>
+      </div>
+      <div class="ligne-resume total">
+        <span>Total TTC</span>
+        <span class="valeur" id="totalTTC">0,00 €</span>
+      </div>
+    </div>
+
+    <!-- === Règlement === -->
+    <div class="section-titre">Règlement</div>
+    <div class="grille-reglement">
+      <div class="champ">
+        <label>Conditions de règlement</label>
+        <textarea name="conditions_reglement" placeholder="Ex : Paiement à 30 jours fin de mois"></textarea>
+      </div>
+      <div class="champ">
+        <label>Pied de page (visible sur le devis)</label>
+        <textarea name="pied_de_page" placeholder="Ex : Merci de votre confiance."></textarea>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-valider">Créer le devis</button>
+
+  </form>
+</div>
+<script src="{{ url_for('static', filename = 'JavaScript/devis.js')}}"></script>
+
+</body>
+</html>

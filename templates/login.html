@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Connexion — DevisFact{% endblock %} </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/login.css') }}">
+</head>
+<body>
+
+{% block content %}
+<div class="auth">
+
+  <!-- ===== PANNEAU GAUCHE — IDENTITÉ VISUELLE ===== -->
+  <aside class="auth__brand">
+    <canvas id="circles-canvas"></canvas>
+    <div class="auth__brand-content">
+      <div class="auth__logo">Devis<span>Fact</span></div>
+      <p class="auth__quote">
+        Chaque devis suivi.
+        Chaque facture maîtrisée.
+      </p>
+    </div>
+  </aside>
+
+  <!-- ===== PANNEAU DROIT — FORMULAIRE ===== -->
+  <section class="auth__form-side">
+    <div class="auth__box">
+
+      <span class="auth__eyebrow">Espace interne</span>
+      <h1 class="auth__title">Connexion</h1>
+      <p class="auth__subtitle">Accédez à votre espace DevisFact.</p>
+
+      <!-- Messages d'erreur (ex: identifiants invalides) -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert--{{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form method="POST" action="{{ url_for('Auth_routes.login') }}" class="auth__form">
+
+        <div class="field">
+          <label for="email">Adresse email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="prenomnom@gmail.com"
+            required
+            autofocus
+          >
+        </div>
+
+        <div class="field">
+          <label for="password">Mot de passe</label>
+          <div class="field__password-wrap">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="******"
+              required
+            >
+            <button type="button" class="toggle-password" id="togglePassword" aria-label="Afficher le mot de passe">
+              👁
+            </button>
+          </div>
+        </div>
+
+        <div class="auth__row">
+          <label class="checkbox">
+            <input type="checkbox" name="remember">
+            <span>Se souvenir de moi</span>
+          </label>
+          <a href="#" class="auth__link">Mot de passe oublié ?</a>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--full">Se connecter</button>
+
+      </form>
+
+      <p class="auth__footnote">
+        Le nom et le rôle sont attribués automatiquement après connexion.
+      </p>
+
+    </div>
+  </section>
+
+</div>
+
+<script src="{{ url_for('static', filename='JavaScript/login.js') }}"></script>
+{% endblock %}
+</body>
+</html>

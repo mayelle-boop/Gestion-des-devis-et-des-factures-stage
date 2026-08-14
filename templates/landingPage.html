@@ -6,7 +6,7 @@
 <title>DevisFact — Gérez vos devis et factures, simplement</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href=" {{ url_for('static', filename = 'css/landingPage2.css')}}">
+<link rel="stylesheet" href=" {{ url_for('static', filename = 'css/landingPage.css')}}">
 </head>
 <body>
 
@@ -17,7 +17,7 @@
       <a href="#showcase">Démo</a>
       <a href="#footer">Contact</a>
     </nav>
-    <a href="#showcase" class="nav__cta">Se Connecter</a>
+    <a href="{{ url_for('Auth_routes.login')}}" class="nav__cta">Se Connecter</a>
   </header>
 
   <!-- ===== SECTION 1 — HERO AVEC CERCLES ANIMÉS ===== -->
@@ -37,7 +37,7 @@
       </p>
       <div class="hero__actions">
         <a href="#showcase" class="btn btn--primary">Découvrir l'application</a>
-        <a href="#footer" class="btn btn--ghost">À propos</a>
+        <a href="{{ url_for('Main_routes.about')}}" class="btn btn--ghost">À propos</a>
       </div>
     </div>
 
@@ -63,11 +63,11 @@
       <article class="video-card">
         <div class="video-card__frame">
           <video class="video-card__media" poster="" muted loop playsinline controls>
-            <source src="videos/creation-devis.mp4" type="video/mp4">
+            <source src="{{ url_for('static', filename = 'video/video1.mp4')}}" type="video/mp4">
           </video>
           <div class="video-card__placeholder">
             <div class="play-btn"></div>
-            <p>Remplacez par <code>videos/creation-devis.mp4</code></p>
+            <p>Remplacez par <code>video/video1.mp4</code></p>
           </div>
         </div>
         <h3>01 · Créer un devis</h3>
@@ -77,11 +77,11 @@
       <article class="video-card">
         <div class="video-card__frame">
           <video class="video-card__media" poster="" muted loop playsinline controls>
-            <source src="videos/conversion-facture.mp4" type="video/mp4">
+            <source src="{{ url_for('static', filename = 'video/video2.mp4')}}" type="video/mp4">
           </video>
           <div class="video-card__placeholder">
             <div class="play-btn"></div>
-            <p>Remplacez par <code>videos/conversion-facture.mp4</code></p>
+            <p>Remplacez par <code>video/video2.mp4</code></p>
           </div>
         </div>
         <h3>02 · Convertir en facture</h3>
@@ -91,11 +91,11 @@
       <article class="video-card">
         <div class="video-card__frame">
           <video class="video-card__media" poster="" muted loop playsinline controls>
-            <source src="videos/suivi-paiement.mp4" type="video/mp4">
+            <source src="{{ url_for('static', filename = 'video/video3.mp4')}}" type="video/mp4">
           </video>
           <div class="video-card__placeholder">
             <div class="play-btn"></div>
-            <p>Remplacez par <code>videos/suivi-paiement.mp4</code></p>
+            <p>Remplacez par <code>video/video3.mp4</code></p>
           </div>
         </div>
         <h3>03 · Suivre le paiement</h3>
@@ -110,6 +110,6 @@
     <p>DevisFact — Projet réalisé en stage chez Devira, 2026.</p>
   </footer>
 
-<script src=" {{ url_for('static', filename = 'JavaScript/landingPage2.js')}}"></script>
+<script src=" {{ url_for('static', filename = 'JavaScript/landingPage.js')}}"></script>
 </body>
 </html>

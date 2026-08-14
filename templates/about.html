@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}À propos — DevisFact{% endblock %}</title>
+
+</head>
+<body>
+
+{% block content %}
+<div class="about-page">
+
+  <!-- ===== NAVIGATION ===== -->
+  <header class="nav">
+    <a href="{{ url_for('landingPage') }}" class="nav__logo">Devis<span>Fact</span></a>
+    <nav class="nav__links">
+      <a href="{{ url_for('Main_routes.landingPage') }}">Accueil</a>
+      <a href="{{ url_for('main_routes.landingPage') }}#showcase">Démo</a>
+    </nav>
+    <a href="{{ url_for('Auth_routes.login') }}" class="nav__cta">Se connecter</a>
+  </header>
+
+  <!-- ===== EN-TÊTE DE PAGE ===== -->
+  <section class="about-hero">
+    <span class="about-hero__eyebrow">À propos</span>
+    <h1 class="about-hero__title">Née d'un besoin interne, pensée pour durer</h1>
+    <p class="about-hero__subtitle">
+      DevisFact est développée en interne par Devira pour son propre usage —
+      fini les devis perdus dans des fichiers épars et les factures ressaisies
+      deux fois.
+    </p>
+  </section>
+
+  <!-- ===== CONTENU PRINCIPAL ===== -->
+  <section class="about-content">
+
+    <div class="about-block">
+      <span class="about-block__number">01</span>
+      <div>
+        <h2>Le problème qu'on résout</h2>
+        <p>
+          Avant DevisFact, un devis vivait dans un fichier, sa version acceptée
+          dans un autre, et le suivi du paiement dans un troisième. Chaque étape
+          demandait une ressaisie, avec le risque d'erreur que ça implique.
+        </p>
+      </div>
+    </div>
+
+    <div class="about-block">
+      <span class="about-block__number">02</span>
+      <div>
+        <h2>Comment ça fonctionne</h2>
+        <p>
+          Un devis accepté devient une facture en un clic, sans ressaisie.
+          Chaque paiement reste rattaché à sa facture et à son client, du premier
+          contact jusqu'à l'encaissement — un seul flux, suivi de bout en bout.
+        </p>
+      </div>
+    </div>
+
+    <div class="about-block">
+      <span class="about-block__number">03</span>
+      <div>
+        <h2>Pour qui</h2>
+        <p>
+          Un outil interne, pensé pour l'équipe de Devira, pas un produit
+          destiné au grand public. La simplicité prime sur la multiplication
+          des options.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== INDICATEURS ===== -->
+  <section class="about-stats">
+    <div class="stat">
+      <span class="stat__value">1</span>
+      <span class="stat__label">flux unifié, devis → facture</span>
+    </div>
+    <div class="stat">
+      <span class="stat__value">0</span>
+      <span class="stat__label">ressaisie manuelle</span>
+    </div>
+    <div class="stat">
+      <span class="stat__value">100%</span>
+      <span class="stat__label">traçabilité des paiements</span>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <p>DevisFact — Projet réalisé en stage chez Devira, 2026.</p>
+  </footer>
+
+</div>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+{% endblock %}
+</body>
+</html>

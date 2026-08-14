@@ -1,0 +1,220 @@
+ :root {
+    --blanc: #FFFFFF;
+    --off-white: #FAF8FC;
+    --rose: #FF4FA3;
+    --bleu: #3D6BFF;
+    --violet: #7B2FF7;
+    --gris-texte: #6B6B76;
+    --gris-fond: #F3F1F7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--off-white);
+    color: #2B2B33;
+    padding: 40px 20px;
+  }
+
+  h1, h2 { font-family: 'Sora', sans-serif; }
+
+  .conteneur {
+    max-width: 780px;
+    margin: 0 auto;
+    background: var(--blanc);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(123, 47, 247, 0.08);
+  }
+
+  .conteneur h1 {
+    font-size: 22px;
+    background: linear-gradient(90deg, var(--rose), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 28px;
+  }
+
+  .section-titre {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    margin-top: 28px;
+  }
+
+  .section-titre:first-of-type { margin-top: 0; }
+
+  .champ label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gris-texte);
+    margin-bottom: 6px;
+  }
+
+  .champ input,
+  .champ select,
+  .champ textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #E4E1EA;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+  }
+
+  .champ input:focus,
+  .champ select:focus,
+  .champ textarea:focus {
+    outline: none;
+    border-color: var(--bleu);
+    box-shadow: 0 0 0 3px rgba(61, 107, 255, 0.12);
+  }
+
+  .champ textarea { resize: vertical; min-height: 70px; }
+
+  /* --- Destinataire --- */
+  .ligne-destinataire {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .ligne-destinataire select { flex: 1; }
+
+  .btn-modifier-client {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid #E4E1EA;
+    background: var(--off-white);
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .btn-modifier-client:hover { background: var(--gris-fond); }
+
+  /* --- Informations --- */
+  .grille-infos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 260px;
+  }
+
+  .champ-duree {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .champ-duree input { width: 100px; }
+  .champ-duree span { font-size: 14px; color: var(--gris-texte); }
+
+  /* --- Tableau des lignes --- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 14px;
+  }
+
+  thead th {
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--gris-texte);
+    padding: 10px 8px;
+    border-bottom: 2px solid var(--off-white);
+  }
+
+  tbody td { padding: 8px; vertical-align: middle; }
+
+  tbody input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #E4E1EA;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .btn-supprimer-ligne {
+    background: none;
+    border: none;
+    color: #E4416A;
+    font-size: 17px;
+    cursor: pointer;
+  }
+
+  .btn-ajouter-ligne {
+    background: var(--off-white);
+    border: 1.5px dashed var(--bleu);
+    color: var(--bleu);
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 8px;
+  }
+
+  .btn-ajouter-ligne:hover { background: rgba(61, 107, 255, 0.08); }
+
+  /* --- TVA --- */
+  .champ-tva { max-width: 200px; margin-top: 20px; }
+
+  /* --- Résumé --- */
+  .resume {
+    background: var(--gris-fond);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-top: 20px;
+  }
+
+  .ligne-resume {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 6px 0;
+    color: var(--gris-texte);
+  }
+
+  .ligne-resume.total {
+    font-weight: 700;
+    font-size: 16px;
+    color: #2B2B33;
+    border-top: 1px solid #E4E1EA;
+    margin-top: 6px;
+    padding-top: 12px;
+  }
+
+  .ligne-resume.total .valeur {
+    background: linear-gradient(90deg, var(--bleu), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* --- Règlement --- */
+  .grille-reglement {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* --- Bouton final --- */
+  .btn-valider {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--rose), var(--violet));
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 28px;
+  }
+
+  .btn-valider:hover { opacity: 0.92; }
